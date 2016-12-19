@@ -1,0 +1,33 @@
+﻿2012 R2 Domain Controller
+802.1x Deployment
+Bend VMWare Hardware Refresh (VMWare Hosts)
+Big IQ Implementation
+Citrix Upgrade
+Cloud Roadmap
+Control M Upgrade
+Decomission SQWL 2008 R2 w/ Migration
+Document Control
+DRaaS
+Encryption Key Management
+Enterprise Storage Implementation: Phase I
+Enterprise Storage Roadmap Development
+Enterprise Vault Maintenance
+GTM Implementation
+Incident Response Table Top
+Information Security Architecture
+Internal Load Balancer DR
+IT Core Infrastructure DR Review
+Mobile Device Management Implementation
+Move Wireless Network To Internal Firewall
+MS Exchange (Cloud) and Office 365 (Cloud)
+POC:SQL Server 2016 New Features
+POC:SQL Server High Availability Groups
+Re-address outside public network
+Remote Access Implementation
+RT Replacement
+SCCM Security Baselines
+Server Class Transparent Proxy (Replacement for Squid)
+Staff Images Added To AD
+Syslog Server Upgrade
+VBlock RCM Update
+Windows 10 Migration

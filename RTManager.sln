@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTCreator", "RTCreator\RTCreator.csproj", "{420564D4-75CB-468D-9C13-31AB52DFDE0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUtilities", "RTUtilities\RTUtilities.csproj", "{3D3183F6-C8BD-40A0-8626-EC97AD29B744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTScheduler", "RTScheduler\RTScheduler.csproj", "{3A3C79D3-F9A2-4751-AE12-A09235B95C5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{420564D4-75CB-468D-9C13-31AB52DFDE0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420564D4-75CB-468D-9C13-31AB52DFDE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420564D4-75CB-468D-9C13-31AB52DFDE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420564D4-75CB-468D-9C13-31AB52DFDE0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3183F6-C8BD-40A0-8626-EC97AD29B744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3183F6-C8BD-40A0-8626-EC97AD29B744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3183F6-C8BD-40A0-8626-EC97AD29B744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3183F6-C8BD-40A0-8626-EC97AD29B744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3C79D3-F9A2-4751-AE12-A09235B95C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3C79D3-F9A2-4751-AE12-A09235B95C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3C79D3-F9A2-4751-AE12-A09235B95C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3C79D3-F9A2-4751-AE12-A09235B95C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
