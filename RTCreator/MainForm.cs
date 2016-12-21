@@ -49,20 +49,26 @@ namespace RTCreator
                 return;
             }
             XmlSerializer serializer = new XmlSerializer(typeof(RTEmail));
+            RTEmail email;
             using (TextReader textReader = new StreamReader(Path.Combine(RTSettings.GetTemplateDirectory(), file + RTSettings.TemplateFileType)))
             {
                 using (XmlReader xmlReader = XmlReader.Create(textReader))
                 {
-                    RTEmail email = (RTEmail)serializer.Deserialize(xmlReader);
-                    using (TicketForm frm = new TicketForm())
-                    {
-                        frm.LoadTicket(email);
-                        if (frm.CreatedTemplates)
-                            LoadTemplateList();
-                    }
+                    email = (RTEmail)serializer.Deserialize(xmlReader);
                 }
             }
-
+            if (email.StartsDate == new DateTime(1900, 1, 1))
+                email.StartsDate = DateTime.Today;
+            if (email.StartedDate == new DateTime(1900, 1, 1))
+                email.StartedDate = DateTime.Today;
+            if (email.DueDate == new DateTime(1900, 1, 1))
+                email.DueDate = DateTime.Today;
+            using (TicketForm frm = new TicketForm())
+            {
+                frm.LoadTicket(email);
+                if (frm.CreatedTemplates)
+                    LoadTemplateList();
+            }
         }
 
         private void btnNoTemplate_Click(object sender, EventArgs e)

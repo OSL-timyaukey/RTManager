@@ -18,7 +18,7 @@ namespace RTUtilities
         public string Subject { get; set; }
 
         [Category("Basic")]
-        [DisplayName("Queue")]
+        [DisplayName("Queue Name")]
         [RTChoiceLoader(typeof(RTChoiceLoaderQueue))]
         [TypeConverter(typeof(RTDropDownConverter))]
         [RTFieldName("Queue")]
@@ -37,11 +37,14 @@ namespace RTUtilities
         #region People Properties
 
         [Category("People")]
+        [DisplayName("Owner Email")]
         [RTChoiceLoader(typeof(RTChoiceLoaderITEmailAddresses))]
         [TypeConverter(typeof(RTDropDownConverter))]
         public string Owner { get; set; }
 
         [Category("People")]
+        [DisplayName("Requestor Email")]
+        [Description("You may type in a requestor email address that is not in the drop-down list")]
         [TypeConverter(typeof(RTDropDownConverterOpen))]
         [RTChoiceLoader(typeof(RTChoiceLoaderAllEmailAddresses))]
         public string Requestor { get; set; }
@@ -51,12 +54,14 @@ namespace RTUtilities
         #region Classification Properties
 
         [Category("Classification")]
+        [DisplayName("Ticket Type")]
         [RTChoices("Incident|Change|Problem|Release|Service Request")]
         [RTFieldName("CF.{Ticket Type}")]
         [TypeConverter(typeof(RTDropDownConverter))]
         public string TicketType { get; set; }
 
         [Category("Classification")]
+        [DisplayName("Change Type")]
         [RTChoiceLoader(typeof(RTChoiceLoaderChangeType))]
         [RTFieldName("CF.{Change Type}")]
         [TypeConverter(typeof(RTDropDownConverter))]
@@ -69,6 +74,7 @@ namespace RTUtilities
         public string Activity { get; set; }
 
         [Category("Classification")]
+        [DisplayName("Sub Activity")]
         [RTChoiceLoader(typeof(RTChoiceLoaderSubActivity))]
         [TypeConverter(typeof(RTDropDownConverter))]
         // Yes, that's "Catagory" and not "Category".
@@ -111,35 +117,35 @@ namespace RTUtilities
         #region Scheduling Properties
 
         [Category("Scheduling")]
+        [DisplayName("Estimated Minutes")]
         public int TimeEstimated { get; set; }
 
         [Category("Scheduling")]
+        [DisplayName("Worked Minutes")]
         public int TimeWorked { get; set; }
 
         [Category("Scheduling")]
+        [DisplayName("Remaining Minutes")]
         public int TimeLeft { get; set; }
 
         [Category("Scheduling")]
+        [DisplayName("Due Date")]
         [RTFieldName("Due")]
+        [Description("Enter \"1/1/1900\" to use today's date")]
         // Dates must be formatted as "yyyy-mm-dd hh:mm:ss" in the email, where the time is optional
         public DateTime DueDate { get; set; }
 
-        [Browsable(false)]
-        public string InitDueDate { get; set; }
-
         [Category("Scheduling")]
+        [DisplayName("Starts Date")]
         [RTFieldName("Starts")]
+        [Description("Enter \"1/1/1900\" to use today's date")]
         public DateTime StartsDate { get; set; }
 
-        [Browsable(false)]
-        public string InitStartsDate { get; set; }
-
         [Category("Scheduling")]
+        [DisplayName("Started Date")]
         [RTFieldName("Started")]
+        [Description("Enter \"1/1/1900\" to use today's date")]
         public DateTime StartedDate { get; set; }
-
-        [Browsable(false)]
-        public string InitStartedDate { get; set; }
 
         #endregion
 
@@ -149,6 +155,11 @@ namespace RTUtilities
                 return "Subject is required.";
             if (string.IsNullOrEmpty(QueueName))
                 return "Queue name is required.";
+            if (TicketType == "Change")
+            {
+                if (string.IsNullOrEmpty(ChangeType))
+                    return "Change type is required for change tickets";
+            }
             if (string.IsNullOrEmpty(Status))
                 return "Ticket status is required.";
             if (string.IsNullOrEmpty(TicketType))

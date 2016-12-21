@@ -35,8 +35,9 @@ namespace RTCreator
             }
             if (System.IO.File.Exists(System.IO.Path.Combine(RTSettings.GetTemplateDirectory(), txtName.Text + RTSettings.TemplateFileType)))
             {
-                MessageBox.Show("There is already a template by that name.");
-                return;
+                DialogResult response = MessageBox.Show("There is already a template by that name. Do you want to replace it?", "Confirm", MessageBoxButtons.OKCancel);
+                if (response != DialogResult.OK)
+                    return;
             }
             TemplateName = txtName.Text;
             this.DialogResult = DialogResult.OK;
