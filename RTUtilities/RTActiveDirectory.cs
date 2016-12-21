@@ -161,12 +161,13 @@ namespace RTUtilities
                 {
                     adName = (string)names[0];
                 }
-                // They must have a name, and either a department of "Security" or an employee ID
-                if (!string.IsNullOrEmpty(adName) &&
-                    (
-                    !string.IsNullOrEmpty(employeeId) || (adDepartment.ToLower() == "security")
-                    )
-                   )
+                if (!string.IsNullOrEmpty(adName) && !string.IsNullOrEmpty(adDepartment))
+          // Some non-security lottery staff do NOT have employee ID in Active Directory!
+          // ALL OSP staff do NOT have an employee ID.
+          //          (
+          //          !string.IsNullOrEmpty(employeeId) || (adDepartment.ToLower() == "security")
+          //          )
+          //         )
                 {
                     if (!adName.ToLower().Contains("-adm"))
                     {
