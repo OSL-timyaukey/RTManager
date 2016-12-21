@@ -58,6 +58,12 @@ namespace RTCreator
         private void btnMakeEmail_Click(object sender, EventArgs e)
         {
             RTEmail email = (RTEmail)(grdValues.SelectedObject);
+            if (email.StartsDate == new DateTime(1900, 1, 1))
+                email.StartsDate = DateTime.Today;
+            if (email.StartedDate == new DateTime(1900, 1, 1))
+                email.StartedDate = DateTime.Today;
+            if (email.DueDate == new DateTime(1900, 1, 1))
+                email.DueDate = DateTime.Today;
             string msg = email.Validate();
             if (!string.IsNullOrEmpty(msg))
             {

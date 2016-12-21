@@ -57,12 +57,6 @@ namespace RTCreator
                     email = (RTEmail)serializer.Deserialize(xmlReader);
                 }
             }
-            if (email.StartsDate == new DateTime(1900, 1, 1))
-                email.StartsDate = DateTime.Today;
-            if (email.StartedDate == new DateTime(1900, 1, 1))
-                email.StartedDate = DateTime.Today;
-            if (email.DueDate == new DateTime(1900, 1, 1))
-                email.DueDate = DateTime.Today;
             using (TicketForm frm = new TicketForm())
             {
                 frm.LoadTicket(email);

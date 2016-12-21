@@ -14,7 +14,7 @@ namespace RTUtilities
 
         public static string GetTemplateDirectory()
         {
-            return "H:\\RTTemplates";
+            return "H:\\RT_Templates";
         }
 
         public const string TemplateFileType = ".tpt";
