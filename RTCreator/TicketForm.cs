@@ -78,5 +78,24 @@ namespace RTCreator
             System.Diagnostics.Process.Start(mailto);
             this.Close();
         }
+
+        private void btnUseToday_Click(object sender, EventArgs e)
+        {
+            UseDate(DateTime.Today);
+        }
+
+        private void btnUseYesterday_Click(object sender, EventArgs e)
+        {
+            UseDate(DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0)));
+        }
+
+        private void UseDate(DateTime date)
+        {
+            RTEmail email = (RTEmail)grdValues.SelectedObject;
+            email.DueDate = date;
+            email.StartsDate = date;
+            email.StartedDate = date;
+            grdValues.Refresh();
+        }
     }
 }
