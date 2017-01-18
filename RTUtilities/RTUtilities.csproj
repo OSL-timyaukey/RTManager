@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldFormatter.cs" />
     <Compile Include="RTActiveDirectory.cs" />
     <Compile Include="RTChoiceLoaderBase.cs" />
     <Compile Include="RTChoiceLoaderChangeType.cs" />
@@ -55,10 +56,12 @@
     <Compile Include="RTDropDownConverterOpen.cs" />
     <Compile Include="RTEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RTFieldFormatterAttribute.cs" />
     <Compile Include="RTFieldNameAttribute.cs" />
     <Compile Include="RTFileLoader.cs" />
     <Compile Include="RTSettings.cs" />
     <Compile Include="RTSuppressAttribute.cs" />
+    <Compile Include="TimeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\EnterpriseProjects.txt" />

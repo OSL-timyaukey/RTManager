@@ -117,34 +117,40 @@ namespace RTUtilities
         #region Scheduling Properties
 
         [Category("Scheduling")]
-        [DisplayName("Estimated Minutes")]
-        public int TimeEstimated { get; set; }
+        [DisplayName("Estimated Time")]
+        [RTFieldFormatter(typeof(TimeFormatter))]
+        [Description("Enter integer number of minutes, or integer or fractional hours followed by \"h\" or \"hours\". Like \"30\", \"120\", \"2h\" or \"3.5 hours\".")]
+        public string TimeEstimated { get; set; }
 
         [Category("Scheduling")]
-        [DisplayName("Worked Minutes")]
-        public int TimeWorked { get; set; }
+        [DisplayName("Worked Time")]
+        [RTFieldFormatter(typeof(TimeFormatter))]
+        [Description("Enter integer number of minutes, or integer or fractional hours followed by \"h\" or \"hours\". Like \"30\", \"120\", \"2h\" or \"3.5 hours\".")]
+        public string TimeWorked { get; set; }
 
         [Category("Scheduling")]
-        [DisplayName("Remaining Minutes")]
-        public int TimeLeft { get; set; }
+        [DisplayName("Remaining Time")]
+        [RTFieldFormatter(typeof(TimeFormatter))]
+        [Description("Enter integer number of minutes, or integer or fractional hours followed by \"h\" or \"hours\". Like \"30\", \"120\", \"2h\" or \"3.5 hours\".")]
+        public string TimeLeft { get; set; }
 
         [Category("Scheduling")]
         [DisplayName("Due Date")]
         [RTFieldName("Due")]
-        [Description("Enter \"1/1/1900\" to use today's date")]
+        [Description("Enter \"1/1/1900\" to use today's date.")]
         // Dates must be formatted as "yyyy-mm-dd hh:mm:ss" in the email, where the time is optional
         public DateTime DueDate { get; set; }
 
         [Category("Scheduling")]
         [DisplayName("Starts Date")]
         [RTFieldName("Starts")]
-        [Description("Enter \"1/1/1900\" to use today's date")]
+        [Description("Enter \"1/1/1900\" to use today's date.")]
         public DateTime StartsDate { get; set; }
 
         [Category("Scheduling")]
         [DisplayName("Started Date")]
         [RTFieldName("Started")]
-        [Description("Enter \"1/1/1900\" to use today's date")]
+        [Description("Enter \"1/1/1900\" to use today's date.")]
         public DateTime StartedDate { get; set; }
 
         #endregion
@@ -164,6 +170,12 @@ namespace RTUtilities
                 return "Ticket status is required.";
             if (string.IsNullOrEmpty(TicketType))
                 return "Ticket type is required.";
+            if (!IsValidTime(TimeEstimated))
+                return "Invalid estimated time";
+            if (!IsValidTime(TimeWorked))
+                return "Invalid worked time";
+            if (!IsValidTime(TimeLeft))
+                return "Invalid remaining time";
             if (string.IsNullOrEmpty(Owner))
                 return "Owner email address is required.";
             if (string.IsNullOrEmpty(Requestor))
@@ -175,6 +187,20 @@ namespace RTUtilities
             if (string.IsNullOrEmpty(Urgency))
                 return "OSL Urgency is required.";
             return null;
+        }
+
+        private bool IsValidTime(string input)
+        {
+            int i;
+            if (string.IsNullOrEmpty(input))
+                return true;
+            if (int.TryParse(input, out i))
+                return true;
+            int hindex = input.ToLower().IndexOf('h');
+            if (hindex <= 0)
+                return false;
+            double h;
+            return double.TryParse(input.Substring(0, hindex).TrimEnd(' '), out h);
         }
 
         [RTSuppress]
@@ -219,7 +245,16 @@ namespace RTUtilities
                         if (propertyValue is string)
                         {
                             hasValue = !String.IsNullOrEmpty((string)propertyValue);
-                            propertyFormatted = (string)propertyValue;
+                            RTFieldFormatterAttribute formatterAttribute = (RTFieldFormatterAttribute)property.GetCustomAttribute(typeof(RTFieldFormatterAttribute));
+                            if (formatterAttribute!=null)
+                            {
+                                FieldFormatter formatter = (FieldFormatter)Activator.CreateInstance(formatterAttribute.FormatterType);
+                                propertyFormatted = formatter.Format((string)propertyValue);
+                            }
+                            else
+                            {
+                                propertyFormatted = (string)propertyValue;
+                            }
                         }
                         else if (propertyValue is int)
                         {

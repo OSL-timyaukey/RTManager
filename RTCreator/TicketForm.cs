@@ -71,9 +71,16 @@ namespace RTCreator
                 return;
             }
             string body = email.CreateMessage + "\n" + txtNotes.Text;
-            //body = System.Web.HttpUtility.UrlEncode(body);
-            body = body.Replace("%", "%25").Replace(" ", "%20").Replace(":", "%3a").Replace("{", "%7b").Replace("{", "%7d").
-                Replace(Environment.NewLine, "%0a").Replace("\n", "%0a");
+            body = body
+                .Replace("%", "%25")
+                .Replace(" ", "%20")
+                .Replace(":", "%3a")
+                .Replace("{", "%7b")
+                .Replace("}", "%7d")
+                .Replace("&", "%26")
+                .Replace(Environment.NewLine, "%0a")
+                .Replace("\n", "%0a")
+                .Replace("\"", "%22");
             string mailto = "mailto:lottery.servicemgmt@rt.lottery.state.or.us?subject=Create%20RT%20Ticket&body=" + body;
             System.Diagnostics.Process.Start(mailto);
             this.Close();
