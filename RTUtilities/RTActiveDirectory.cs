@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using AD = System.DirectoryServices;
 
 namespace RTUtilities
@@ -13,6 +14,7 @@ namespace RTUtilities
         private static List<string> _AllEmailAddresses = null;
 
         private const string _CacheFileName = "ActiveDirectoryCache.txt";
+        private static Semaphore _AccessLock;
 
         //Not currently using this, but it works and I may want to switch
         //to picking email address by selecting name from list so I
@@ -21,8 +23,10 @@ namespace RTUtilities
         {
             get
             {
-                if (_ITPersonNames == null)
-                    Load();
+                // This semaphore will block until the background thread that 
+                // calls Load() is done.
+                _AccessLock.WaitOne();
+                _AccessLock.Release();
                 return _ITPersonNames;
             }
         }
@@ -31,8 +35,10 @@ namespace RTUtilities
         {
             get
             {
-                if (_ITEmailAddresses == null)
-                    Load();
+                // This semaphore will block until the background thread that 
+                // calls Load() is done.
+                _AccessLock.WaitOne();
+                _AccessLock.Release();
                 return _ITEmailAddresses;
             }
         }
@@ -41,13 +47,23 @@ namespace RTUtilities
         {
             get
             {
-                if (_AllEmailAddresses == null)
-                    Load();
+                // This semaphore will block until the background thread that 
+                // calls Load() is done.
+                _AccessLock.WaitOne();
+                _AccessLock.Release();
                 return _AllEmailAddresses;
             }
         }
 
-        private static void Load()
+        public static void LoadInBackground()
+        {
+            // Other threads will block when calling the accessor properties
+            // above until Load() releases this Semaphore() as its last step.
+            _AccessLock = new Semaphore(0, 1);
+            ThreadPool.QueueUserWorkItem(Load);
+        }
+
+        private static void Load(object dummy)
         {
             _ITPersonNames = new List<string>();
             _ITEmailAddresses = new List<string>();
@@ -71,6 +87,8 @@ namespace RTUtilities
             _ITPersonNames.Sort();
             _ITEmailAddresses.Sort();
             _AllEmailAddresses.Sort();
+            // Release the lock so other threads can access this data.
+            _AccessLock.Release();
         }
 
         private static void LoadFromFile(string cacheFullName)

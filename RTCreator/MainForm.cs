@@ -20,6 +20,7 @@ namespace RTCreator
         public MainForm()
         {
             InitializeComponent();
+            RTActiveDirectory.LoadInBackground();
             LoadTemplateList();
             lblTemplates.Text = "Select Template (from " + RTSettings.GetTemplateDirectory() + ")";
         }
