@@ -89,7 +89,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.ShowIcon = false;
-            this.Text = "Create RT Ticket - 1/18/2017";
+            this.Text = "Create RT Ticket - 6/9/2017";
             this.ResumeLayout(false);
             this.PerformLayout();
 

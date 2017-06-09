@@ -81,7 +81,8 @@ namespace RTCreator
                 .Replace(Environment.NewLine, "%0a")
                 .Replace("\n", "%0a")
                 .Replace("\"", "%22");
-            string mailto = "mailto:lottery.servicemgmt@rt.lottery.state.or.us?subject=Create%20RT%20Ticket&body=" + body;
+            string address = System.Configuration.ConfigurationManager.AppSettings["CreateEmailAddress"];
+            string mailto = "mailto:" + address + "?subject=Create%20RT%20Ticket&body=" + body;
             System.Diagnostics.Process.Start(mailto);
             this.Close();
         }
