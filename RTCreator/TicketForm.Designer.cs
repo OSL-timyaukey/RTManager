@@ -33,14 +33,15 @@
             this.btnMakeEmail = new System.Windows.Forms.Button();
             this.lblNotes = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.btnUseToday = new System.Windows.Forms.Button();
-            this.btnUseYesterday = new System.Windows.Forms.Button();
+            this.cboTimeChoices = new System.Windows.Forms.ComboBox();
+            this.lblQuickTimes = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // grdValues
             // 
             this.grdValues.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grdValues.LineColor = System.Drawing.SystemColors.ControlDark;
             this.grdValues.Location = new System.Drawing.Point(12, 12);
             this.grdValues.Name = "grdValues";
             this.grdValues.PropertySort = System.Windows.Forms.PropertySort.Categorized;
@@ -91,35 +92,31 @@
             this.txtNotes.Size = new System.Drawing.Size(496, 95);
             this.txtNotes.TabIndex = 2;
             // 
-            // btnUseToday
+            // cboTimeChoices
             // 
-            this.btnUseToday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUseToday.Location = new System.Drawing.Point(12, 606);
-            this.btnUseToday.Name = "btnUseToday";
-            this.btnUseToday.Size = new System.Drawing.Size(84, 23);
-            this.btnUseToday.TabIndex = 3;
-            this.btnUseToday.Text = "Use Today";
-            this.btnUseToday.UseVisualStyleBackColor = true;
-            this.btnUseToday.Click += new System.EventHandler(this.btnUseToday_Click);
+            this.cboTimeChoices.FormattingEnabled = true;
+            this.cboTimeChoices.Location = new System.Drawing.Point(87, 608);
+            this.cboTimeChoices.Name = "cboTimeChoices";
+            this.cboTimeChoices.Size = new System.Drawing.Size(128, 21);
+            this.cboTimeChoices.TabIndex = 4;
+            this.cboTimeChoices.SelectedIndexChanged += new System.EventHandler(this.cboTimeChoices_SelectedIndexChanged);
             // 
-            // btnUseYesterday
+            // lblQuickTimes
             // 
-            this.btnUseYesterday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUseYesterday.Location = new System.Drawing.Point(102, 606);
-            this.btnUseYesterday.Name = "btnUseYesterday";
-            this.btnUseYesterday.Size = new System.Drawing.Size(84, 23);
-            this.btnUseYesterday.TabIndex = 4;
-            this.btnUseYesterday.Text = "Yesterday";
-            this.btnUseYesterday.UseVisualStyleBackColor = true;
-            this.btnUseYesterday.Click += new System.EventHandler(this.btnUseYesterday_Click);
+            this.lblQuickTimes.AutoSize = true;
+            this.lblQuickTimes.Location = new System.Drawing.Point(12, 611);
+            this.lblQuickTimes.Name = "lblQuickTimes";
+            this.lblQuickTimes.Size = new System.Drawing.Size(69, 13);
+            this.lblQuickTimes.TabIndex = 3;
+            this.lblQuickTimes.Text = "Quick Times:";
             // 
             // TicketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 641);
-            this.Controls.Add(this.btnUseYesterday);
-            this.Controls.Add(this.btnUseToday);
+            this.Controls.Add(this.lblQuickTimes);
+            this.Controls.Add(this.cboTimeChoices);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.lblNotes);
             this.Controls.Add(this.btnMakeEmail);
@@ -142,8 +139,8 @@
         private System.Windows.Forms.Button btnMakeEmail;
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.Button btnUseToday;
-        private System.Windows.Forms.Button btnUseYesterday;
+        private System.Windows.Forms.ComboBox cboTimeChoices;
+        private System.Windows.Forms.Label lblQuickTimes;
     }
 }
 

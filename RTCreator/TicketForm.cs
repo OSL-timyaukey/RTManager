@@ -23,6 +23,45 @@ namespace RTCreator
         {
             InitializeComponent();
             CreatedTemplates = false;
+            AddTimeChoices();
+        }
+
+        private void AddTimeChoices()
+        {
+            cboTimeChoices.Items.Clear();
+            AddTimeChoice(0, "15", "15 minutes today");
+            AddTimeChoice(0, "30", "30 minutes today");
+            AddTimeChoice(0, "45", "45 minutes today");
+            AddTimeChoice(0, "1h", "1 hour today");
+            AddTimeChoice(0, "90", "90 minutes today");
+            AddTimeChoice(0, "2h", "2 hours today");
+            AddTimeChoice(1, "15", "15 minutes yesterday");
+            AddTimeChoice(1, "30", "30 minutes yesterday");
+            AddTimeChoice(1, "45", "45 minutes yesterday");
+            AddTimeChoice(1, "1h", "1 hour yesterday");
+            AddTimeChoice(1, "90", "90 minutes yesterday");
+            AddTimeChoice(1, "2h", "2 hours yesterday");
+        }
+
+        private void AddTimeChoice(int daysAgo, string time, string label)
+        {
+            TimeChoice choice = new TimeChoice();
+            choice.DaysAgo = daysAgo;
+            choice.Time = time;
+            choice.Label = label;
+            cboTimeChoices.Items.Add(choice);
+        }
+
+        private class TimeChoice
+        {
+            public int DaysAgo;
+            public string Time;
+            public string Label;
+
+            public override string ToString()
+            {
+                return Label;
+            }
         }
 
         public void LoadTicket(RTEmail initialContent)
@@ -87,22 +126,16 @@ namespace RTCreator
             this.Close();
         }
 
-        private void btnUseToday_Click(object sender, EventArgs e)
+        private void cboTimeChoices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UseDate(DateTime.Today);
-        }
-
-        private void btnUseYesterday_Click(object sender, EventArgs e)
-        {
-            UseDate(DateTime.Today.Subtract(new TimeSpan(1, 0, 0, 0)));
-        }
-
-        private void UseDate(DateTime date)
-        {
+            TimeChoice choice = (TimeChoice)cboTimeChoices.SelectedItem;
+            DateTime date = DateTime.Today.Subtract(new TimeSpan(choice.DaysAgo, 0, 0, 0));
             RTEmail email = (RTEmail)grdValues.SelectedObject;
             email.DueDate = date;
             email.StartsDate = date;
             email.StartedDate = date;
+            email.TimeEstimated = choice.Time;
+            email.TimeWorked = choice.Time;
             grdValues.Refresh();
         }
     }
