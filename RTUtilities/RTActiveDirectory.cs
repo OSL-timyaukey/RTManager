@@ -196,7 +196,7 @@ namespace RTUtilities
                         }
                         if (!string.IsNullOrEmpty(adName))
                         {
-                            if (adDepartment.ToLower() == "information technology")
+                            if (adDepartment.ToLower() == "information technology" || adDepartment.StartsWith("IT"))
                             {
                                 _ITPersonNames.Add(adName);
                                 if (!string.IsNullOrEmpty(emailaddr))
